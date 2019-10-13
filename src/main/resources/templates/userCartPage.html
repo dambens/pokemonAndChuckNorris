@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+</head>
+<body>
+<div th:each="movie: ${movies}">
+    <div th:text="${movie.price}"></div>
+    <div th:text="${movie.price}"></div>
+</div>
+<div th:text="${sum}"></div>
+
+</body>
+</html>

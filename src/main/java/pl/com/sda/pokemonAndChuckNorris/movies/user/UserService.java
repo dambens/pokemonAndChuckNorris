@@ -4,6 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
     private UserRespository userRespository;
@@ -13,10 +16,16 @@ public class UserService {
         this.userRespository = userRespository;
         this.modelMapper = modelMapper;
     }
-    public String saveUser(UserDTO userToSave){
+    public Optional<String> saveUser(UserDTO userToSave){
         //todo sprawdzić czy nazwa usera istnieje
+        if(userRespository.existsByUsername(userToSave.getUsername())){
+            return Optional.empty();
+        }
         UserDocument userDocumentToSave = modelMapper.map(userToSave, UserDocument.class);
         UserDocument savedUserDocument = userRespository.save(userDocumentToSave);
-        return savedUserDocument.getId();
+        return Optional.of(savedUserDocument.getId());
+    }
+    public List<UserDocument> getAllUsers(){
+        return userRespository.findAll();
     }
 }

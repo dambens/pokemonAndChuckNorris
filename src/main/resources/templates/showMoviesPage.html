@@ -15,16 +15,21 @@
 
 <div style="display: flex; flex-wrap: wrap">
     <div th:each="movie: ${movies}">
-        <div class="card" style="width: 18rem;">
-            <img th:src="@{${movie.getPosterUrl()}}" th:width="150" th:height="200"/>
-            <div class="card-body">
-                <h5 th:text="${movie.title}"></h5>
-                <p th:text="${movie.year}" class="card-text"></p>
-                <p th:text="${movie.type}" class="card-text"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <form method="post" th:action="@{/addMovieToCart/{id}(id=${movie.imdbID})}">
+            <div class="card" style="width: 18rem;">
+                <img th:src="@{${movie.getPosterUrl()}}" th:width="150" th:height="200"/>
+                <div class="card-body">
+                    <h5 th:text="${movie.title}"></h5>
+                    <p th:text="${movie.year}" class="card-text"></p>
+                    <p th:text="${movie.type}" class="card-text"></p>
+                    <h3>[[${#numbers.formatDecimal(movie.price,2,2)}]] $</h3>
+                        <input type="submit" class="btn btn-primary" value="Add to chart"/>
+                        <a href="#" class="btn">See details</a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

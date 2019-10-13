@@ -9,6 +9,7 @@ public class UserDocument {
     private String id;
     private String username;
     private String password;
+    private String email;
 
     public UserDocument() {
     }
@@ -16,6 +17,15 @@ public class UserDocument {
     public UserDocument(String username, String password) {
         this.username = username;
         this.password = password;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {
